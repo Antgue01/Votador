@@ -6,6 +6,24 @@ using UnityEngine.UI;
 public class HandlePeople : MonoBehaviour
 {
     [SerializeField] InputField personName;
+    PeopleList OwnerList;
+    int posInList;
+    
+    public void setOwnerList(PeopleList list, int pos)
+    {
+        OwnerList = list;
+        posInList = pos;
+    }
+    public void decreasePosInList()
+    {
+        posInList--;
+    }
+
+    void onRemove()
+    {
+        OwnerList?.Remove(posInList);
+        GameObject.Destroy(gameObject);
+    }
     public void blockPerson()
     {
         if (personName)
@@ -17,6 +35,7 @@ public class HandlePeople : MonoBehaviour
         {
             personName.interactable = true;
             personName.text = "";
+            onRemove();
         }
 
     }

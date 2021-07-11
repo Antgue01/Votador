@@ -31,24 +31,40 @@ public class AddPeopleList : PeopleList
     }
     private void Awake()
     {
-        addButton.onClick.AddListener(add);
+        addButton.onClick.AddListener(Add);
         peopleSize = Mathf.Abs(PeoplePrefab.GetComponent<RectTransform>().rect.height);
         addButtonTr = addButton.GetComponent<RectTransform>();
         nextPos = new Vector3(addButtonTr.position.x, addButtonTr.position.y - peopleSize, 0);
         initPos = nextPos;
     }
-    public void add()
+    public override void Remove(int pos)
+    {
+        peopleList.RemoveAt(pos);
+        Vector3 offset = new Vector3(0, peopleSize, 0);
+        nextPos += offset;
+        addButtonTr.position += offset;
+        for (int i = pos; i < peopleList.Count; i++)
+        {
+            peopleList[i].GetComponent<RectTransform>().position += offset;
+            peopleList[i].GetComponent<HandlePeople>().decreasePosInList();
+
+        }
+    }
+    public override void Add()
     {
         peopleList.Add(GameObject.Instantiate(PeoplePrefab, this.transform, false));
         peopleList[peopleList.Count - 1].GetComponent<RectTransform>().position = nextPos;
         nextPos.y -= peopleSize;
         addButtonTr.position = nextPos;
+        peopleList[peopleList.Count - 1].GetComponent<HandlePeople>()?.setOwnerList(this, peopleList.Count - 1);
     }
-    public void add(string name)
+    public void Add(string name)
     {
-        add();
-        peopleList[peopleList.Count - 1].GetComponent<HandlePeople>()?.setPersonName(name);
-        peopleList[peopleList.Count - 1].GetComponent<HandlePeople>()?.blockPerson();
+        Add();
+        HandlePeople hP = peopleList[peopleList.Count - 1].GetComponent<HandlePeople>();
+        hP?.setPersonName(name);
+        hP?.blockPerson();
+
 
     }
     public override void disableAll()
@@ -63,7 +79,7 @@ public class AddPeopleList : PeopleList
     }
     public override void Save()
     {
-        
+
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
         StreamWriter writer = new StreamWriter(path + fileName + extention, false, System.Text.Encoding.UTF8);
@@ -84,7 +100,7 @@ public class AddPeopleList : PeopleList
         for (int i = 0; i < n; i++)
         {
             string personName = reader.ReadLine();
-            add(personName);
+            Add(personName);
 
         }
         reader.Close();

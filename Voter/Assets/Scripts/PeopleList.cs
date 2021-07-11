@@ -31,5 +31,8 @@ public abstract class PeopleList : MonoBehaviour
     public abstract void Save();
     public abstract void Load();
 
+    public abstract void Add();
+    public abstract void Remove(int pos);
+
 
 }
