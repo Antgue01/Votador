@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HandlePeople : MonoBehaviour
 {
-    [SerializeField]  InputField personName;
+    [SerializeField] InputField personName;
     public void blockPerson()
     {
         if (personName)
@@ -19,5 +19,23 @@ public class HandlePeople : MonoBehaviour
             personName.text = "";
         }
 
+    }
+    public void setPersonName(string name)
+    {
+        if (personName)
+        {
+            personName.text = name;
+        }
+    }
+    public string getPersonName()
+    {
+        if (personName)
+            return personName.text;
+        return "Error";
+    }
+    private void OnDisable()
+    {
+        if (personName && personName.interactable)
+            personName.text = "";
     }
 }
