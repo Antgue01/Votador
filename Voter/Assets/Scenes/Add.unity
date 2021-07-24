@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PeoplePrefab: {fileID: 3313480968675760643, guid: 1309330599ba8da4bb2998f51b142994, type: 3}
   addButton: {fileID: 491587769}
+  initialPos: {fileID: 491587768}
 --- !u!1 &471609517
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,12 +7,14 @@ using System.IO;
 public class AddPeopleList : PeopleList
 {
     [SerializeField] Button addButton;
+    [SerializeField] RectTransform initialPos;
     RectTransform addButtonTr;
     float peopleSize;
+
     Vector3 nextPos;
     Vector3 initPos;
-    const string path = "Lists/Building/";
-    const string extention = ".muebles";
+    protected string path;
+    protected string extention;
     public void Accept()
     {
         if (save)
@@ -27,22 +29,40 @@ public class AddPeopleList : PeopleList
         }
         peopleList.Clear();
         nextPos = initPos;
-        addButtonTr.position = nextPos;
+        if (addButtonTr)
+            addButtonTr.position = nextPos;
     }
     private void Awake()
     {
-        addButton.onClick.AddListener(Add);
+        if (addButton)
+        {
+            addButton.onClick.AddListener(Add);
+            addButtonTr = addButton.GetComponent<RectTransform>();
+        }
         peopleSize = Mathf.Abs(PeoplePrefab.GetComponent<RectTransform>().rect.height);
-        addButtonTr = addButton.GetComponent<RectTransform>();
-        nextPos = new Vector3(addButtonTr.position.x, addButtonTr.position.y - peopleSize, 0);
+        nextPos = initialPos.position + Vector3.down * peopleSize;
         initPos = nextPos;
+        setNames();
+
+    }
+    protected virtual void setNames()
+    {
+        path = "Lists/Building/";
+        extention = ".muebles";
+
+    }
+    protected virtual void write(StreamWriter writer, GameObject peopleObject)
+    {
+        writer.WriteLine(peopleObject.GetComponent<HandlePeople>()?.getPersonName());
+
     }
     public override void Remove(int pos)
     {
         peopleList.RemoveAt(pos);
         Vector3 offset = new Vector3(0, peopleSize, 0);
         nextPos += offset;
-        addButtonTr.position += offset;
+        if (addButtonTr)
+            addButtonTr.position += offset;
         for (int i = pos; i < peopleList.Count; i++)
         {
             peopleList[i].GetComponent<RectTransform>().position += offset;
@@ -55,7 +75,8 @@ public class AddPeopleList : PeopleList
         peopleList.Add(GameObject.Instantiate(PeoplePrefab, this.transform, false));
         peopleList[peopleList.Count - 1].GetComponent<RectTransform>().position = nextPos;
         nextPos.y -= peopleSize;
-        addButtonTr.position = nextPos;
+        if (addButtonTr)
+            addButtonTr.position = nextPos;
         peopleList[peopleList.Count - 1].GetComponent<HandlePeople>()?.setOwnerList(this, peopleList.Count - 1);
     }
     public void Add(string name)
@@ -70,12 +91,14 @@ public class AddPeopleList : PeopleList
     public override void disableAll()
     {
         base.disableAll();
-        addButton.gameObject.SetActive(false);
+        if (addButton)
+            addButton.gameObject.SetActive(false);
     }
     public override void enableAll()
     {
         base.enableAll();
-        addButton.gameObject.SetActive(true);
+        if (addButton)
+            addButton.gameObject.SetActive(true);
     }
     public override void Save()
     {
@@ -86,7 +109,7 @@ public class AddPeopleList : PeopleList
         writer.WriteLine(peopleList.Count);
         foreach (GameObject item in peopleList)
         {
-            writer.WriteLine(item.GetComponent<HandlePeople>()?.getPersonName());
+            write(writer, item);
         }
         writer.Close();
         enableAll();
