@@ -49,7 +49,7 @@ public class AddPeopleList : PeopleList
     }
     protected virtual void setNames()
     {
-        savePath = loadPath = "Lists/Building/";
+        savePath = loadPath = "/Lists/Building/";
         saveExtention = loadExtention = ".muebles";
 
     }
@@ -105,9 +105,9 @@ public class AddPeopleList : PeopleList
     public override void Save()
     {
 
-        if (!Directory.Exists(savePath))
-            Directory.CreateDirectory(savePath);
-        StreamWriter writer = new StreamWriter(savePath + fileName + saveExtention, false, System.Text.Encoding.UTF8);
+        if (!Directory.Exists(Application.persistentDataPath + savePath))
+            Directory.CreateDirectory(Application.persistentDataPath + savePath);
+        StreamWriter writer = new StreamWriter(Application.persistentDataPath + savePath + fileName + saveExtention, false, System.Text.Encoding.UTF8);
         writer.WriteLine(peopleList.Count);
         foreach (GameObject item in peopleList)
         {
@@ -120,7 +120,7 @@ public class AddPeopleList : PeopleList
     {
         resetList();
         enableAll();
-        StreamReader reader = new StreamReader(loadPath + fileName + loadExtention, System.Text.Encoding.UTF8);
+        StreamReader reader = new StreamReader(Application.persistentDataPath + loadPath + fileName + loadExtention, System.Text.Encoding.UTF8);
         int n = int.Parse(reader.ReadLine());
         for (int i = 0; i < n; i++)
         {

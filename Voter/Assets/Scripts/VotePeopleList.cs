@@ -7,14 +7,14 @@ public class VotePeopleList : AddPeopleList
 {
     protected override void setNames()
     {
-        savePath = "Lists/Voted/";
+        savePath = "/Lists/Voted/";
         saveExtention = ".voto";
-        loadPath = "Lists/Building/"; 
+        loadPath = "/Lists/Building/";
         loadExtention = ".muebles";
     }
     protected override void write(StreamWriter writer, GameObject peopleObject)
     {
         VotePeople vote = peopleObject.GetComponent<VotePeople>();
-        writer.WriteLine(vote?.getPersonName() + " " + vote?.GetVote());
+        writer.WriteLine(vote?.getPersonName() + "-" + (int)vote?.GetVote());
     }
 }
