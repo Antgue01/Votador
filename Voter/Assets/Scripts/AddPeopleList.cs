@@ -35,6 +35,10 @@ public class AddPeopleList : PeopleList
         if (addButtonTr)
             addButtonTr.position = nextPos;
     }
+    public void kk(Vector2 v)
+    {
+        print(v);
+    }
     private void Awake()
     {
         if (addButton)
@@ -42,10 +46,11 @@ public class AddPeopleList : PeopleList
             addButton.onClick.AddListener(Add);
             addButtonTr = addButton.GetComponent<RectTransform>();
         }
-        peopleSize = /*offset +*/ /*(Mathf.Abs(PeoplePrefab.GetComponent<RectTransform>().rect.height))*/1;
-        nextPos = /*transform.TransformPoint*/(initialPos.position) +Vector3.down*.5f/*+ Vector3.down * peopleSize*/;
+        peopleSize = 1;
+        nextPos = (initialPos.position) +Vector3.down*.5f;
         initPos = nextPos;
         setNames();
+        //print(c.referencePixelsPerUnit / PeoplePrefab.GetComponent<RectTransform>().rect.height);
 
     }
     protected virtual void setNames()
@@ -75,7 +80,6 @@ public class AddPeopleList : PeopleList
     }
     public override void Add()
     {
-        print(Screen.safeArea.width);
         peopleList.Add(GameObject.Instantiate(PeoplePrefab, this.transform, false));
         peopleList[peopleList.Count - 1].GetComponent<RectTransform>().position = nextPos;
         nextPos.y -= peopleSize;
