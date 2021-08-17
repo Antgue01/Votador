@@ -17,6 +17,7 @@ public class AddPeopleList : PeopleList
     protected string loadPath;
     protected string saveExtention;
     protected string loadExtention;
+    const float offset = 10;
     public void Accept()
     {
         if (save)
@@ -41,8 +42,8 @@ public class AddPeopleList : PeopleList
             addButton.onClick.AddListener(Add);
             addButtonTr = addButton.GetComponent<RectTransform>();
         }
-        peopleSize = Mathf.Abs(PeoplePrefab.GetComponent<RectTransform>().rect.height);
-        nextPos = initialPos.position + Vector3.down * peopleSize;
+        peopleSize = /*offset +*/ /*(Mathf.Abs(PeoplePrefab.GetComponent<RectTransform>().rect.height))*/1;
+        nextPos = /*transform.TransformPoint*/(initialPos.position) +Vector3.down*.5f/*+ Vector3.down * peopleSize*/;
         initPos = nextPos;
         setNames();
 
@@ -74,6 +75,7 @@ public class AddPeopleList : PeopleList
     }
     public override void Add()
     {
+        print(Screen.safeArea.width);
         peopleList.Add(GameObject.Instantiate(PeoplePrefab, this.transform, false));
         peopleList[peopleList.Count - 1].GetComponent<RectTransform>().position = nextPos;
         nextPos.y -= peopleSize;
