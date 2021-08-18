@@ -18,7 +18,7 @@ public class AddPeopleList : PeopleList
     protected string saveExtention;
     protected string loadExtention;
     const float offset = 10;
-    public void Accept()
+    public virtual void Accept()
     {
         if (save)
             Save();

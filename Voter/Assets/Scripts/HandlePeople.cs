@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class HandlePeople : MonoBehaviour
 {
-    [SerializeField] InputField personName;
-    PeopleList OwnerList;
+    [SerializeField] protected InputField personName;
+    protected PeopleList OwnerList;
     int posInList;
     
     public void setOwnerList(PeopleList list, int pos)

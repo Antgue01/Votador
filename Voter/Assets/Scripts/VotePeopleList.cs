@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class VotePeopleList : AddPeopleList
 {
+
     protected override void setNames()
     {
         savePath = "/Lists/Voted/";
@@ -17,4 +18,33 @@ public class VotePeopleList : AddPeopleList
         VotePeople vote = peopleObject.GetComponent<VotePeople>();
         writer.WriteLine(vote?.getPersonName() + "-" + (int)vote?.GetVote());
     }
+    public void LoadAuto()
+    {
+        setFileName("auto");
+        if (File.Exists(Application.persistentDataPath + savePath + fileName + saveExtention))
+        {
+            //string load = loadPath;
+            //loadPath = savePath;
+            //string ext = loadExtention;
+            //loadExtention = saveExtention;
+            setLoad();
+            //loadPath = load;
+            //loadExtention=ext;
+            Accept();
+            enableAll();
+            print("hola");
+        }
+    }
+    public override void Accept()
+    {
+
+        base.Accept();
+        if (!save && fileName != "auto")
+        {
+            setFileName("auto");
+            Save();
+        }
+    }
+
+
 }

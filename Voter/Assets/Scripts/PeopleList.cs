@@ -35,4 +35,5 @@ public abstract class PeopleList : MonoBehaviour
     public abstract void Remove(int pos);
 
 
+
 }
