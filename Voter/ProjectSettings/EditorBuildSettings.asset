@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Add.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Vote.unity
+    guid: b586c0377d484154da6422c3ac34ac6c
+  - enabled: 1
+    path: Assets/Scenes/Count.unity
+    guid: d167cd06a0a3d92409504f3a8357ea0e
   m_configObjects: {}
