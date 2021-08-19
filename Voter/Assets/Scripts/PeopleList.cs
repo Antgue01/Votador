@@ -12,6 +12,7 @@ public abstract class PeopleList : MonoBehaviour
     {
         fileName = name;
     }
+    public string getFileName() { return fileName; }
     public void setSave() { save = true; }
     public void setLoad() { save = false; }
    public virtual void disableAll()

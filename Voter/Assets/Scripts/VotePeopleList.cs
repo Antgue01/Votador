@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class VotePeopleList : AddPeopleList
 {
-
+    protected bool _savingOrLoading = false;
+    public override void disableAll()
+    {
+        _savingOrLoading = true;
+        base.disableAll();
+    }
+    public override void enableAll()
+    {
+        _savingOrLoading = false;
+        base.enableAll();
+    }
     protected override void setNames()
     {
         savePath = "/Lists/Voted/";
@@ -20,29 +30,39 @@ public class VotePeopleList : AddPeopleList
     }
     public void LoadAuto()
     {
-        setFileName("auto");
-        if (File.Exists(Application.persistentDataPath + savePath + fileName + saveExtention))
+        if (!_savingOrLoading)
         {
-            //string load = loadPath;
-            //loadPath = savePath;
-            //string ext = loadExtention;
-            //loadExtention = saveExtention;
-            setLoad();
-            //loadPath = load;
-            //loadExtention=ext;
-            Accept();
-            enableAll();
-            print("hola");
+
+            string fname = fileName;
+            setFileName("auto");
+            if (File.Exists(Application.persistentDataPath + savePath + fileName + saveExtention))
+            {
+                resetList();
+                StreamReader reader = new StreamReader(Application.persistentDataPath + savePath + fileName + saveExtention);
+                int num = int.Parse(reader.ReadLine());
+                for (int i = 0; i < num; i++)
+                {
+                    string line = reader.ReadLine();
+                    string[] personData = line.Split('-');
+                    Add(personData[0]);
+                    peopleList[i].GetComponent<VotePeople>().VotePersonProgramatically(int.Parse(personData[1]));
+                }
+                enableAll();
+                reader.Close();
+            }
+            setFileName(fname);
         }
     }
     public override void Accept()
     {
 
         base.Accept();
+        string name = fileName;
         if (!save && fileName != "auto")
         {
             setFileName("auto");
             Save();
+            setFileName(name);
         }
     }
 

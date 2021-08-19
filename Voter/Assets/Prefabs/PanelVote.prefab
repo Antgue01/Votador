@@ -513,6 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personName: {fileID: 5233953660859813458}
+  _dropdown: {fileID: 3085473520879440341}
 --- !u!1 &4826786226315842695
 GameObject:
   m_ObjectHideFlags: 0

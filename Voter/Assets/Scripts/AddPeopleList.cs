@@ -24,7 +24,7 @@ public class AddPeopleList : PeopleList
             Save();
         else Load();
     }
-    void resetList()
+    protected void resetList()
     {
         foreach (GameObject GO in peopleList)
         {
@@ -88,7 +88,7 @@ public class AddPeopleList : PeopleList
         else
         {
             RectTransform previous = peopleList[peopleList.Count - 2].GetComponent<RectTransform>();
-           current.position = previous.position + Vector3.down * peopleSize;
+            current.position = previous.position + Vector3.down * peopleSize;
             nextPos = current.position + Vector3.down * peopleSize;
         }
         if (addButtonTr)
@@ -121,6 +121,7 @@ public class AddPeopleList : PeopleList
 
         if (!Directory.Exists(Application.persistentDataPath + savePath))
             Directory.CreateDirectory(Application.persistentDataPath + savePath);
+
         StreamWriter writer = new StreamWriter(Application.persistentDataPath + savePath + fileName + saveExtention, false, System.Text.Encoding.UTF8);
         writer.WriteLine(peopleList.Count);
         foreach (GameObject item in peopleList)
@@ -132,17 +133,21 @@ public class AddPeopleList : PeopleList
     }
     public override void Load()
     {
-        resetList();
-        enableAll();
-        StreamReader reader = new StreamReader(Application.persistentDataPath + loadPath + fileName + loadExtention, System.Text.Encoding.UTF8);
-        int n = int.Parse(reader.ReadLine());
-        for (int i = 0; i < n; i++)
+        if (File.Exists(Application.persistentDataPath + loadPath + fileName + loadExtention))
         {
-            string personName = reader.ReadLine();
-            Add(personName);
 
+            resetList();
+            enableAll();
+            StreamReader reader = new StreamReader(Application.persistentDataPath + loadPath + fileName + loadExtention, System.Text.Encoding.UTF8);
+            int n = int.Parse(reader.ReadLine());
+            for (int i = 0; i < n; i++)
+            {
+                string personName = reader.ReadLine();
+                Add(personName);
+
+            }
+            reader.Close();
         }
-        reader.Close();
 
     }
 }
