@@ -9,27 +9,35 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     const string path = "/Lists/Ready/";
     Dictionary<string, int[]> results;
-    Dictionary<int, List<string>> persons;
+    List<List<string>> persons;
     public List<string> Persons(VotePeople.Vote vote)
     {
         return persons[(int)vote];
     }
-    void Start()
+    public int[] Results(string personName)
+    {
+        return results[personName];
+    }
+    public void Count()
     {
         DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath + path);
-         results = new Dictionary<string, int[]>();
-        persons= new Dictionary<int,List<string>>();
-       //para cada archivo relleno el diccionario de personas-votos, conteándolos todos
+        results = new Dictionary<string, int[]>();
+        persons = new List<List<string>>();
+        for (int i = 0; i < 4; i++)
+        {
+            persons[i] = new List<string>();
+        }
+        //para cada archivo relleno el diccionario de personas-votos, conteándolos todos
         foreach (FileInfo file in info.GetFiles())
         {
             //FileStream myfile = file.Open(FileMode.Open);
-            StreamReader reader=new StreamReader(Application.persistentDataPath + path + file.Name);
+            StreamReader reader = new StreamReader(Application.persistentDataPath + path + file.Name);
             int num = int.Parse(reader.ReadLine());
             for (int i = 0; i < num; i++)
             {
                 int[] personResults;
                 string line = reader.ReadLine();
-                string[] personData = line.Split('-');
+                string[] personData = line.Split('+');
                 if (!results.TryGetValue(personData[0], out personResults))
                 {
                     int[] aux = { 0, 0, 0, 0 };
@@ -49,13 +57,9 @@ public class Counter : MonoBehaviour
         foreach (string person in results.Keys)
         {
             int voteResult = computeVoteResult(results[person]);
-            if (!persons.TryGetValue(voteResult, out List<string> aux))
-            {
-                persons.Add(voteResult, new List<string> { person });
-            }
-            else persons[voteResult].Add(person);
+            persons[voteResult].Add(person);
         }
-        print("SI: "+ Persons(VotePeople.Vote.SI).Count);
+        print("SI: " + Persons(VotePeople.Vote.SI).Count);
         foreach (string item in Persons(VotePeople.Vote.SI))
         {
             print(item);
@@ -82,7 +86,7 @@ public class Counter : MonoBehaviour
         int max = 0;
         for (int i = 0; i < votes.Length; i++)
         {
-            if (votes[i]> max)
+            if (votes[i] > max)
             {
                 max = votes[i];
                 index = i;

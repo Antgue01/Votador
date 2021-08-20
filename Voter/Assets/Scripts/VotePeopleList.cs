@@ -26,7 +26,7 @@ public class VotePeopleList : AddPeopleList
     protected override void write(StreamWriter writer, GameObject peopleObject)
     {
         VotePeople vote = peopleObject.GetComponent<VotePeople>();
-        writer.WriteLine(vote?.getPersonName() + "-" + (int)vote?.GetVote());
+        writer.WriteLine(vote?.getPersonName() + "+" + (int)vote?.GetVote());
     }
     public void LoadAuto()
     {
@@ -43,7 +43,7 @@ public class VotePeopleList : AddPeopleList
                 for (int i = 0; i < num; i++)
                 {
                     string line = reader.ReadLine();
-                    string[] personData = line.Split('-');
+                    string[] personData = line.Split('+');
                     Add(personData[0]);
                     peopleList[i].GetComponent<VotePeople>().VotePersonProgramatically(int.Parse(personData[1]));
                 }
