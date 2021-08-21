@@ -25,8 +25,9 @@ public class Counter : MonoBehaviour
         persons = new List<List<string>>();
         for (int i = 0; i < 4; i++)
         {
-            persons[i] = new List<string>();
+            persons.Add(new List<string>());
         }
+        
         //para cada archivo relleno el diccionario de personas-votos, conteándolos todos
         foreach (FileInfo file in info.GetFiles())
         {

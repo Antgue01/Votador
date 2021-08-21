@@ -7,12 +7,12 @@ using System.IO;
 public class AddPeopleList : PeopleList
 {
     [SerializeField] Button addButton;
-    [SerializeField] RectTransform initialPos;
+    [SerializeField]protected RectTransform initialPos;
     RectTransform addButtonTr;
-    float peopleSize;
+    protected float peopleSize;
 
-    Vector3 nextPos;
-    Vector3 initPos;
+    protected Vector3 nextPos;
+    protected Vector3 initPos;
     protected string savePath;
     protected string loadPath;
     protected string saveExtention;
@@ -38,6 +38,13 @@ public class AddPeopleList : PeopleList
 
     private void Awake()
     {
+        initializePositionVars();
+        setNames();
+        //print(c.referencePixelsPerUnit / PeoplePrefab.GetComponent<RectTransform>().rect.height);
+
+    }
+    protected virtual void initializePositionVars()
+    {
         if (addButton)
         {
             addButton.onClick.AddListener(Add);
@@ -46,9 +53,6 @@ public class AddPeopleList : PeopleList
         peopleSize = 1;
         nextPos = (initialPos.position) + Vector3.down * .5f;
         initPos = nextPos;
-        setNames();
-        //print(c.referencePixelsPerUnit / PeoplePrefab.GetComponent<RectTransform>().rect.height);
-
     }
     protected virtual void setNames()
     {
