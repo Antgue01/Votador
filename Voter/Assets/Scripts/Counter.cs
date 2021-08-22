@@ -63,22 +63,7 @@ public class Counter : MonoBehaviour
             int voteResult = computeVoteResult(results[person]);
             persons[voteResult].Add(person);
         }
-        foreach (string item in Persons(VotePeople.Vote.SI))
-        {
-            print(item);
-        }
-        foreach (string item in Persons(VotePeople.Vote.NO))
-        {
-            print(item);
-        }
-        foreach (string item in Persons(VotePeople.Vote.ABSTENCION))
-        {
-            print(item);
-        }
-        foreach (string item in Persons(VotePeople.Vote.TACHADO))
-        {
-            print(item);
-        }
+
     }
 
     int computeVoteResult(int[] votes)
@@ -93,7 +78,7 @@ public class Counter : MonoBehaviour
                 index = i;
             }
         }
-        return index;
+        return index == 3 ? 1 : index;
 
     }
 

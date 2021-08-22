@@ -34,7 +34,7 @@ public class CountPeopleList : AddPeopleList
 
         }
         _doubts.position = nextPos;
-        nextPos.y -= peopleSize + (_No.rect.height / _scaler.referencePixelsPerUnit);
+        nextPos.y -= peopleSize + (_doubts.rect.height / _scaler.referencePixelsPerUnit);
         foreach (string person in _counter.Persons(VotePeople.Vote.ABSTENCION))
         {
             Add();
