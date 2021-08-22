@@ -10,10 +10,9 @@ public class CountPeopleList : AddPeopleList
     [SerializeField] RectTransform _No;
     [SerializeField] RectTransform _doubts;
 
-    private void Awake()
+    private void Start()
     {
         initializePositionVars();
-
         _counter.Count();
         foreach (string person in _counter.Persons(VotePeople.Vote.SI))
         {

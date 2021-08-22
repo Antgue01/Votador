@@ -9,17 +9,17 @@ public class FormatGiver : MonoBehaviour
     [SerializeField] Material YES;
     [SerializeField] Material NO;
     [SerializeField] Material DOUBTS;
-    [SerializeField]  TMP_Text text;
-    Material[] sprites;
+    [SerializeField] TMP_Text text;
+    Material[] materials;
     [SerializeField] List<TMP_Text> votes;
 
     private void Awake()
     {
-        sprites = new Material[] { YES, NO, DOUBTS };
+        materials = new Material[] { YES, NO, DOUBTS };
     }
-    public void Format(VotePeople.Vote vote,string nText,int[]results)
+    public void Format(VotePeople.Vote vote, string nText, int[] results)
     {
-        text.fontSharedMaterial.CopyPropertiesFromMaterial(sprites[(int)vote]);
+        text.fontMaterial = materials[(int)vote];
         text.text = nText;
         for (int i = 0; i < votes.Count; i++)
         {

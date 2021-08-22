@@ -12,6 +12,7 @@ public class Counter : MonoBehaviour
     List<List<string>> persons;
     public List<string> Persons(VotePeople.Vote vote)
     {
+
         return persons[(int)vote];
     }
     public int[] Results(string personName)
@@ -23,11 +24,13 @@ public class Counter : MonoBehaviour
         DirectoryInfo info = new DirectoryInfo(Application.persistentDataPath + path);
         results = new Dictionary<string, int[]>();
         persons = new List<List<string>>();
+
         for (int i = 0; i < 4; i++)
         {
             persons.Add(new List<string>());
         }
-        
+        print(persons.Count);
+
         //para cada archivo relleno el diccionario de personas-votos, conteándolos todos
         foreach (FileInfo file in info.GetFiles())
         {
@@ -60,27 +63,24 @@ public class Counter : MonoBehaviour
             int voteResult = computeVoteResult(results[person]);
             persons[voteResult].Add(person);
         }
-        print("SI: " + Persons(VotePeople.Vote.SI).Count);
         foreach (string item in Persons(VotePeople.Vote.SI))
         {
             print(item);
         }
-        print("NO: " + Persons(VotePeople.Vote.NO).Count);
         foreach (string item in Persons(VotePeople.Vote.NO))
         {
             print(item);
         }
-        print("ABS: " + Persons(VotePeople.Vote.ABSTENCION).Count);
         foreach (string item in Persons(VotePeople.Vote.ABSTENCION))
         {
             print(item);
         }
-        print("TACH: " + Persons(VotePeople.Vote.TACHADO).Count);
         foreach (string item in Persons(VotePeople.Vote.TACHADO))
         {
             print(item);
         }
     }
+
     int computeVoteResult(int[] votes)
     {
         int index = 0;
@@ -96,9 +96,5 @@ public class Counter : MonoBehaviour
         return index;
 
     }
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }
