@@ -18,9 +18,9 @@ public class VotePeopleList : AddPeopleList
     }
     protected override void setNames()
     {
-        savePath = "/Lists/Voted/";
+        savePath = PathManager.votedPath;
         saveExtention = ".voto";
-        loadPath = "/Lists/Building/";
+        loadPath = PathManager.buildingPath;
         loadExtention = ".muebles";
     }
     protected override void write(StreamWriter writer, GameObject peopleObject)

@@ -40,7 +40,6 @@ public class AddPeopleList : PeopleList
     {
         initializePositionVars();
         setNames();
-        //print(c.referencePixelsPerUnit / PeoplePrefab.GetComponent<RectTransform>().rect.height);
 
     }
     protected virtual void initializePositionVars()
@@ -56,7 +55,7 @@ public class AddPeopleList : PeopleList
     }
     protected virtual void setNames()
     {
-        savePath = loadPath = "/Lists/Building/";
+        savePath = loadPath = PathManager.buildingPath;
         saveExtention = loadExtention = ".muebles";
 
     }

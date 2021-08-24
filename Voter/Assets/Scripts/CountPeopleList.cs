@@ -9,7 +9,7 @@ public class CountPeopleList : AddPeopleList
     [SerializeField] CanvasScaler _scaler;
     [SerializeField] RectTransform _No;
     [SerializeField] RectTransform _doubts;
-
+    
     private void Start()
     {
         initializePositionVars();
