@@ -1,0 +1,13 @@
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.exe
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.deps.json
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.runtimeconfig.json
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.runtimeconfig.dev.json
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.dll
+C:\Users\madar\Desktop\Votador\VoterTester\bin\Debug\netcoreapp3.1\VoterTester.pdb
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.csprojAssemblyReference.cache
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.AssemblyInfoInputs.cache
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.AssemblyInfo.cs
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.csproj.CoreCompileInputs.cache
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.dll
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.pdb
+C:\Users\madar\Desktop\Votador\VoterTester\obj\Debug\netcoreapp3.1\VoterTester.genruntimeconfig.cache
