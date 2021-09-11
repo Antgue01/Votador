@@ -8,6 +8,7 @@ public abstract class PeopleList : MonoBehaviour
     protected bool save;
     protected string fileName;
     protected List<GameObject> peopleList = new List<GameObject>();
+
     public void setFileName(string name)
     {
         fileName = name;

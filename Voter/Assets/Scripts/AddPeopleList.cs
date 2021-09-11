@@ -8,6 +8,8 @@ public class AddPeopleList : PeopleList
 {
     [SerializeField] Button addButton;
     [SerializeField]protected RectTransform initialPos;
+    [SerializeField] protected CanvasScaler _scaler;
+    [SerializeField] protected float _xPercentage=85;
     RectTransform addButtonTr;
     protected float peopleSize;
 
@@ -17,6 +19,8 @@ public class AddPeopleList : PeopleList
     protected string loadPath;
     protected string saveExtention;
     protected string loadExtention;
+    protected Vector3 scaleVector;
+
     const float offset = 10;
     public virtual void Accept()
     {
@@ -50,8 +54,9 @@ public class AddPeopleList : PeopleList
             addButtonTr = addButton.GetComponent<RectTransform>();
         }
         peopleSize = 1;
-        nextPos = (initialPos.position) + Vector3.down * .5f;
+        nextPos = (initialPos.position) + Vector3.down * .4f;
         initPos = nextPos;
+        scaleVector = new Vector3(_xPercentage / _scaler.referencePixelsPerUnit, PeoplePrefab.transform.localScale.y, PeoplePrefab.transform.localScale.z);
     }
     protected virtual void setNames()
     {
@@ -81,6 +86,7 @@ public class AddPeopleList : PeopleList
     public override void Add()
     {
         peopleList.Add(GameObject.Instantiate(PeoplePrefab, this.transform, false));
+        peopleList[peopleList.Count - 1].transform.localScale = scaleVector;
         RectTransform current = peopleList[peopleList.Count - 1].GetComponent<RectTransform>();
         if (peopleList.Count < 2)
         {

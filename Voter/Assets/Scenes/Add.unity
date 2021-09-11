@@ -545,7 +545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -45.39002}
+  m_AnchoredPosition: {x: 0, y: -323.43353}
   m_SizeDelta: {x: 0, y: 7638.96}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &274573189
@@ -563,6 +563,8 @@ MonoBehaviour:
   PeoplePrefab: {fileID: 3313480968675760643, guid: 1309330599ba8da4bb2998f51b142994, type: 3}
   addButton: {fileID: 491587769}
   initialPos: {fileID: 491587768}
+  _scaler: {fileID: 1254741545}
+  _xPercentage: 90
 --- !u!1 &278415663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,8 +2482,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 278415665}
   m_HandleRect: {fileID: 278415664}
   m_Direction: 2
-  m_Value: 1.0064682
-  m_Size: 0.058915902
+  m_Value: 1.0460899
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
