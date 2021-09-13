@@ -647,10 +647,10 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 28e517c336e2a044e88d18bd82957138, type: 3}
     - m_Text: NO
       m_Image: {fileID: 21300000, guid: 962d194a29edd09438442c8204dd7997, type: 3}
+    - m_Text: NO Renueva
+      m_Image: {fileID: 21300000, guid: 42d1ffb500d909147a80b3bafb0aa652, type: 3}
     - m_Text: ABSTENCION
       m_Image: {fileID: 21300000, guid: 5756bcbd6ae3a7d408e3a8160a1bd2bc, type: 3}
-    - m_Text: TACHAR
-      m_Image: {fileID: 21300000, guid: 4a04c2c3876ca1745a20cee8fcf1e923, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

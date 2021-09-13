@@ -28,10 +28,10 @@ public class CountPeopleList : AddPeopleList
             peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.NO, person, _counter.Results(person));
 
         }
-        foreach (string person in _counter.Persons(VotePeople.Vote.TACHADO))
+        foreach (string person in _counter.Persons(VotePeople.Vote.NR))
         {
             Add();
-            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.TACHADO, person, _counter.Results(person));
+            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.NR, person, _counter.Results(person));
 
         }
         _doubts.position = nextPos;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class VotePeople : HandlePeople
 {
     protected bool _autosave = true;
-    public enum Vote { SI = 0, NO = 1, ABSTENCION = 2, TACHADO = 3 }
+    public enum Vote { SI = 0, NO = 1, NR = 2 ,ABSTENCION = 3, }
     Vote vote;
     public Vote GetVote() { return vote; }
     [SerializeField] protected Dropdown _dropdown;
