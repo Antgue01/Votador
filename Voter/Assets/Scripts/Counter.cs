@@ -11,7 +11,7 @@ public class Counter : MonoBehaviour
     const string path = "/Lists/Ready/";
     Dictionary<string, int[]> results;
     List<List<string>> persons;
-    const float _quorum = 2 / 3;
+    const float _quorum = 2.0f / 3.0f;
     [SerializeField] TMP_Text number;
 
 
@@ -80,10 +80,10 @@ public class Counter : MonoBehaviour
     {
         //Si hay más de mitad de abst, entonces es directamente no
         if (votes[3] >= halfPlusOne)
-            return 1;
+            return (int)VotePeople.Vote.NO;
         int validVotes = 0;
         //sumamos todos los votos menos las abstenciones
-        for (int i = 0; i < 2; i++)
+        for (int i = (int)VotePeople.Vote.SI; i <= (int)VotePeople.Vote.NR; i++)
         {
             validVotes += votes[i];
         }
@@ -91,11 +91,11 @@ public class Counter : MonoBehaviour
         int halfValidVotes = validVotes / 2;
         int DoubtQuorumValidVotes = (validVotes * 5) % 10 >= 5 ? halfValidVotes + 1 : halfValidVotes;
         //asumimos que no
-        int voteResult = 1;
-        if (votes[0] >= YesQuorumValidVotes)
-            voteResult = 0;
-        else if (votes[0] >= DoubtQuorumValidVotes)
-            voteResult = 2;
+        int voteResult = (int)VotePeople.Vote.NO;
+        if (votes[(int)VotePeople.Vote.SI] >= YesQuorumValidVotes)
+            voteResult = (int)VotePeople.Vote.SI;
+        else if (votes[(int)VotePeople.Vote.SI] >= DoubtQuorumValidVotes)
+            voteResult = (int)VotePeople.Vote.ABSTENCION;
         return voteResult;
     }
 

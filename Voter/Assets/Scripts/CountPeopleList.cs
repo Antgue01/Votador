@@ -31,7 +31,7 @@ public class CountPeopleList : AddPeopleList
         foreach (string person in _counter.Persons(VotePeople.Vote.NR))
         {
             Add();
-            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.NR, person, _counter.Results(person));
+            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.NO, person, _counter.Results(person));
 
         }
         _doubts.position = nextPos;
@@ -39,7 +39,7 @@ public class CountPeopleList : AddPeopleList
         foreach (string person in _counter.Persons(VotePeople.Vote.ABSTENCION))
         {
             Add();
-            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.ABSTENCION, person, _counter.Results(person));
+            peopleList[peopleList.Count - 1].GetComponent<FormatGiver>().Format(VotePeople.Vote.NR, person, _counter.Results(person));
 
         }
     }
