@@ -18,6 +18,18 @@ namespace VoterTester
     }
     class Program
     {
+        static void swap(int a, int b, KeyValuePair<double, int>[] pair)
+        {
+            KeyValuePair<double, int> aux = pair[a];
+            pair[a] = pair[b];
+            pair[b] = aux;
+        }
+        static void swapKeys(ref KeyValuePair<double, int>a,ref KeyValuePair<double, int> b)
+        {
+            double aux = a.Key;
+            a = new KeyValuePair<double, int>(b.Key, a.Value);
+            b = new KeyValuePair<double, int>(aux, b.Value);
+        }
 
         static void Main(string[] args)
         {
@@ -48,7 +60,7 @@ namespace VoterTester
             KeyValuePair<double, int>[] probabilidades = new KeyValuePair<double, int>[4];
             int votos = -1;
             Console.WriteLine("");
-            string[] STRINGS = { "SI", "NO", "NR", "ABSTENCIÓN" };
+            string[] STRINGS = { "SI", "NO", "ABSTENCIÓN", "NR" };
             int limite = 100;
             int i = 0;
             int papeletas = miembros * muebles;
@@ -60,15 +72,18 @@ namespace VoterTester
                     parsed = int.TryParse(Console.ReadLine(), out votos);
                 } while (!parsed || votos < 0 || votos > limite);
                 limite -= votos;
-                probabilidades[i] = (new KeyValuePair<double, int>(papeletas * Math.Round(votos / 100.0), i));
+
+                probabilidades[i] = (new KeyValuePair<double, int>(Math.Round(papeletas * votos / 100.0), i));
                 votos = -1;
                 Console.WriteLine("");
                 i++;
             }
+
             for (int y = i; y < STRINGS.Length; y++)
             {
-                probabilidades[y] = (new KeyValuePair<double, int>(Math.Round((limite) / 100.0) * papeletas, y));
+                probabilidades[y] = (new KeyValuePair<double, int>(Math.Round(limite / 100.0 * papeletas), y));
             }
+            swapKeys(ref probabilidades[2],ref probabilidades[3]);
             Array.Sort(probabilidades, new cmp());
             int index = -1;
             int t = 0;
@@ -79,22 +94,20 @@ namespace VoterTester
                 t++;
             }
             Directory.CreateDirectory("TestLists");
+            int fin = index < 0 ? probabilidades.Length : index;
             for (int h = 0; h < miembros; h++)
             {
                 StreamWriter writer = new StreamWriter(string.Format("TestLists/colegial{0:D" + digits + "}.voto", h + 1));
                 writer.WriteLine(muebles);
                 for (int j = 0; j < muebles; j++)
                 {
-                    int fin = index < 0 ? probabilidades.Length : index;
                     int rand = r.Next(0, fin);
                     writer.WriteLine(string.Format("áàéèíìñ-óòúù {0:D3}", j + 1) + "+" + probabilidades[rand].Value);
                     probabilidades[rand] = new KeyValuePair<double, int>(probabilidades[rand].Key - 1, probabilidades[rand].Value);
                     if (probabilidades[rand].Key < 1)
                     {
+                        swap(fin, rand, probabilidades);
                         fin--;
-                        KeyValuePair<double, int> aux = probabilidades[fin];
-                        probabilidades[fin] = probabilidades[rand];
-                        probabilidades[rand] = aux;
                     }
                 }
                 writer.Close();
