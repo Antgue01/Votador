@@ -94,7 +94,7 @@ namespace VoterTester
                 t++;
             }
             Directory.CreateDirectory("TestLists");
-            int fin = index < 0 ? probabilidades.Length : index;
+            int fin = index < 0 ? probabilidades.Length-1 : index;
             for (int h = 0; h < miembros; h++)
             {
                 StreamWriter writer = new StreamWriter(string.Format("TestLists/colegial{0:D" + digits + "}.voto", h + 1));
